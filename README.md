@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Vision Guide
 
 An Expo-based React Native app that uses Vision Camera and TensorFlow Lite for
@@ -78,3 +79,6 @@ shape.
 The app announces only stable high-confidence detections and throttles speech so
 the user is not overwhelmed while moving the camera. The current implementation
 announces the most confident object and whether it is left, right, or ahead.
+=======
+
+>>>>>>> c3b3d07d18b50f9babb0f880df8525197fbe919a
