@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "Vision Mate",
+    "slug": "react-native-vision-detector",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "icon": "./assets/icon.png",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera to perform real-time object detection."
+      },
+      "bundleIdentifier": "com.deepak.visiondetector"
+    },
+    "android": {
+      "icon": "./assets/icon.png",
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.deepak.visiondetector"
+    },
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera to perform real-time object detection.",
+          "enableMicrophonePermission": false,
+          "enableFrameProcessors": true
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 26
+          },
+          "ios": {
+            "deploymentTarget": "15.1"
+          }
+        }
+      ],
+      [
+        "react-native-fast-tflite",
+        {
+          "enableCoreMLDelegate": true
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b2d45834-bcad-4bba-b219-2692bda6034f"
+      }
+    },
+    "owner": "deepakps03"
+  }
+}
