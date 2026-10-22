@@ -1,84 +1,58 @@
-<<<<<<< HEAD
-# Vision Guide
+# VisionMate
 
-An Expo-based React Native app that uses Vision Camera and TensorFlow Lite for
-on-device object detection. The app is designed for blind and low-vision users:
-when the phone camera is pointed at nearby objects, it detects the best match and
-speaks the object name and position, such as "laptop ahead" or "bottle on your
-left".
+VisionMate is an assistive real-time vision guide designed for blind and visually impaired individuals. Built with React Native and Expo, the application pairs on-device machine learning with audio feedback to detect nearby objects and announce their spatial positions in real time.
 
-## Features
+## Key Features
 
-- Full-screen camera viewfinder
-- On-device TensorFlow Lite inference with `react-native-fast-tflite`
-- Real-time frame processing with `react-native-vision-camera`
-- Spoken object guidance with `expo-speech`
-- High-contrast viewfinder and status text
-- Repeat and Voice On/Off controls with accessibility labels
-- Model picker for comparing bundled TensorFlow Lite detectors
+- **On-Device Detection**: High-speed, offline object detection using TensorFlow Lite (`react-native-fast-tflite`).
+- **Flexible Model Architecture**: Bundled support for YOLO11n, EfficientDet-Lite2, and SSD MobileNet v1.
+- **Spatial Audio Guidance**: Real-time spoken narration via `expo-speech` indicating object location (e.g., "laptop ahead", "bottle on your left").
+- **Cloud AI Description**: Integrated Google Gemini Vision (`gemini-3-flash-preview`) for on-demand natural language scene narration.
+- **Accessibility-Focused UI**: High-contrast controls, large touch targets, and speech throttling to prevent sensory overload.
 
-## Requirements
+## Architecture & Bundled Models
 
-This project uses native camera and TensorFlow Lite modules, so it must run in a
-custom Expo development build or a native build. It will not run inside Expo Go.
+The detector dynamically selects between three pre-configured TensorFlow Lite models:
 
-## Run
+| Model | Input Resolution | Input Type | Output Parser |
+| :--- | :--- | :--- | :--- |
+| **YOLO11n** | 320x320 | float32 | YOLO parser |
+| **EfficientDet-Lite2** | 448x448 | uint8 | Box / Class / Score parser |
+| **SSD MobileNet v1** | 300x300 | uint8 | Box / Class / Score parser |
 
-```bash
-npm install
-npm run android
-```
+Labels are mapped through `models/labels.json`.
 
-For iOS:
+## Getting Started
 
-```bash
-npm run ios
-```
+### Prerequisites
 
-To start Metro for an already installed development build:
+- Node.js (v18+)
+- Android Studio / Android SDK (for native Android builds)
+- Custom Expo development client (due to native camera and TFLite modules, Expo Go is not supported)
 
-```bash
-npm start
-```
+### Installation
 
-## Models
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/deepak-palanivel/VisionMate.git
+   cd VisionMate
+   ```
 
-The app currently bundles three local detector plugins:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```text
-models/yolo11n.tflite
-models/efficientdet_lite2_detection.tflite
-models/ssd_mobilenet_v1.tflite
-```
+3. Run on Android:
+   ```bash
+   npm run android
+   ```
 
-Each model slot defines its input size, input data type, and parser in
-`App.js`. This makes it easy to add or replace model plugins without rewriting
-the camera UI.
+4. Run on iOS:
+   ```bash
+   npm run ios
+   ```
 
-The current slots are:
+## License
 
-```text
-YOLO11n            320x320 float32, YOLO output parser
-EfficientDet-Lite2 448x448 uint8, box/class/score parser
-SSD MobileNet      300x300 uint8, box/class/score parser
-```
-
-The labels live at:
-
-```text
-models/labels.json
-```
-
-To use a custom model, add the `.tflite` file to `models`, update
-`MODEL_PLUGINS` in `App.js`, and reuse either the `yolo` parser or `boxes`
-parser. Add a new parser only when the model has a different output tensor
-shape.
-
-## Accessibility Notes
-
-The app announces only stable high-confidence detections and throttles speech so
-the user is not overwhelmed while moving the camera. The current implementation
-announces the most confident object and whether it is left, right, or ahead.
-=======
-
->>>>>>> c3b3d07d18b50f9babb0f880df8525197fbe919a
+This project is licensed under the MIT License.
